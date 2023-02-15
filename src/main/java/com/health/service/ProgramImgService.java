@@ -34,7 +34,7 @@ public class ProgramImgService {
 		//파일 업로드
 		if(!StringUtils.isEmpty(oriImgName)) {
 			imgName = fileService.uploadFile(programImgLocation, oriImgName, programImgFile.getBytes());
-			imgUrl = "/images/program/" + imgName;
+			imgUrl = "/images/item/" + imgName;
 		}
 		
 		//상품 이미지 정보 저장

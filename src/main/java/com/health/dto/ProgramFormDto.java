@@ -18,7 +18,7 @@ import lombok.Setter;
 @Setter
 public class ProgramFormDto {
 	
-	private Long programId; //상품코드
+	private Long id; //상품코드
 	
 	@NotBlank(message = "상품명은 필수 입력 값입니다.")
 	private String programNm; //상품명

@@ -2,6 +2,7 @@ package com.health.repository;
 
 import java.util.List;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.querydsl.QuerydslPredicateExecutor;
@@ -30,6 +31,5 @@ public interface ProgramRepository extends JpaRepository<Program, Long>,
 	
 	@Query(value = "select * from item i where i.program_detail like %:programDetail% order by i.price desc", nativeQuery = true)
 	List<Program> findByProgramDetailByNative(@Param("programDetail") String programDetail);
-	
 
 }

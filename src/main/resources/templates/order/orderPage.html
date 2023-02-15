@@ -93,7 +93,9 @@ border-radius: 10px;
 <div layout:fragment="content">
 	<div class="container">
 	  <div class="page-recommend my-auto"><h1>운동 프로그램</h1></div>
-	  <div class="photo-program"><img src="/images/training1.jpg" class="rounded float-start" width="100%"></div>
+	  <div class="photo-program" th:each="programImg : ${program.programImgDtoList}">
+	  <img src="/images/training1.jpg" class="rounded float-start" width="100%">
+	  </div>
 	  <div class="name-program"><h2>근력 강화 프로그램</h2></div>
 	  <div class="price-program"><h2>가격: 100,000</h2></div>
 	  <div class="line"></div>

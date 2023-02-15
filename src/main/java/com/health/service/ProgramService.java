@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.health.dto.MainProgramDto;
+import com.health.dto.ProgramDto;
 import com.health.dto.ProgramFormDto;
 import com.health.dto.ProgramImgDto;
 import com.health.dto.ProgramSearchDto;
@@ -57,6 +58,21 @@ public class ProgramService {
 			return program.getId();
 	}
 	
+	@Transactional(readOnly = true)
+	public List<ProgramDto> getProgramList() {
+		List<Program> programs = programRepository.findAll();
+		List<ProgramDto> programList = new ArrayList<>();
+		
+		for (Program program : programs) {
+			ProgramImg programImg = programImgRepository.findByProgramIdAndRepimgYn(program.getId(), "Y");
+			ProgramDto programDto = new ProgramDto(program, programImg.getImgUrl());
+			programList.add(programDto);
+		}
+		
+		return programList;
+	}
+	
+	
 	//상품 가져오기
 	@Transactional(readOnly = true)
 	public ProgramFormDto getProgramDtl(Long programId) {
@@ -83,10 +99,11 @@ public class ProgramService {
 		return programFormDto;
 	}
 	
+	
 	//상품 수정
 	public Long updateProgram(ProgramFormDto programFormDto, List<MultipartFile> programImgFileList) throws Exception {
 		
-		Program program = programRepository.findById(programFormDto.getProgramId())
+		Program program = programRepository.findById(programFormDto.getId())
 				.orElseThrow(EntityNotFoundException::new);
 		
 		program.updateProgram(programFormDto);
